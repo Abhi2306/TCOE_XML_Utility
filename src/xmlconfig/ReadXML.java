@@ -23,10 +23,10 @@ public class ReadXML {
 	static Document doc;
 
 	// Generic method to create object of properties file
-	public static Properties Read_Data_From_Properties(String FilePath, String FileName_Prop) throws IOException {
+	public static Properties Read_Data_From_Properties(String FilePath_Prop, String FileName_Prop) throws IOException {
 
 		prop = new Properties();
-		File file = new File(FilePath + "\\" + FileName_Prop);
+		File file = new File(System.getProperty("user.dir")+"\\"+FilePath_Prop + "\\" + FileName_Prop);
 		FileInputStream inputStream = new FileInputStream(file);
 
 		prop.load(inputStream);
@@ -39,7 +39,7 @@ public class ReadXML {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder Builder = factory.newDocumentBuilder();
 
-		File file = new File(FilePath + "\\" + FileName_XML);
+		File file = new File(System.getProperty("user.dir")+"\\"+FilePath + "\\" + FileName_XML);
 
 		// To read data from properties file
 		prop = ReadXML.Read_Data_From_Properties(FilePath_Prop, FileName_Prop);

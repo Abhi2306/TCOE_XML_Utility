@@ -32,7 +32,7 @@ public class WriteXML {
 
 		DocumentBuilder Builder = Factory.newDocumentBuilder();
 
-		File file = new File(FilePath + "\\" + FileName_XML);
+		File file = new File(System.getProperty("user.dir")+"\\"+FilePath + "\\" + FileName_XML);
 		doc = Builder.parse(file);
 
 		doc.getDocumentElement().normalize();
