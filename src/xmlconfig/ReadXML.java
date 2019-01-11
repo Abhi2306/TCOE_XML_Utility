@@ -19,14 +19,19 @@ import org.xml.sax.SAXException;
 
 public class ReadXML {
 
-	static Properties prop;
+	public static Properties prop;
 	static Document doc;
 
 	// Generic method to create object of properties file
 	public static Properties Read_Data_From_Properties(String FilePath_Prop, String FileName_Prop) throws IOException {
 
 		prop = new Properties();
-		File file = new File(System.getProperty("user.dir")+"\\"+FilePath_Prop + "\\" + FileName_Prop);
+		
+		// File file = new
+		// File("C:\\Users\\abhishek.khatod\\Documents\\eclipse_workspace\\yash.TCOEFrameWork\\src\\main\\java\\Configuration"+"\\"
+		// + FileName_Prop);
+
+		File file = new File(System.getProperty("user.dir") + "\\" + FilePath_Prop + "\\" + FileName_Prop);
 		FileInputStream inputStream = new FileInputStream(file);
 
 		prop.load(inputStream);
@@ -34,17 +39,19 @@ public class ReadXML {
 		return prop;
 	}
 
-	public static String ReadXMLData(String FilePath, String FilePath_Prop, String FileName_XML, String FileName_Prop) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+	public static String ReadXMLData(String FilePath, String FilePath_Prop, String FileName_XML, String FileName_Prop)
+			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder Builder = factory.newDocumentBuilder();
 
-		File file = new File(System.getProperty("user.dir")+"\\"+FilePath + "\\" + FileName_XML);
+		File file = new File(System.getProperty("user.dir") + "\\" + FilePath + "\\" + FileName_XML);
 
 		// To read data from properties file
 		prop = ReadXML.Read_Data_From_Properties(FilePath_Prop, FileName_Prop);
 
-		String expression = prop.getProperty("xpath");
+		String expression = prop.getProperty("xpath") + "\"" + prop.getProperty("tag_name_attr_value") + "\"]/"
+				+ prop.getProperty("tag_name_read_search");
 
 		// To parse the XML file
 		Document document = Builder.parse(file);
@@ -61,6 +68,6 @@ public class ReadXML {
 
 		String testInput = node != null ? node.getTextContent() : "Cannot Read the tag from provided xpath";
 
-		return testInput;	
+		return testInput;
 	}
 }
